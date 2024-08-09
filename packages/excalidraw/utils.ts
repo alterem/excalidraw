@@ -929,6 +929,12 @@ export const assertNever = (
   throw new Error(message);
 };
 
+export function invariant(condition: any, message: string): asserts condition {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+
 /**
  * Memoizes on values of `opts` object (strict equality).
  */
@@ -1157,3 +1163,6 @@ export const promiseTry = async <TValue, TArgs extends unknown[]>(
     resolve(fn(...args));
   });
 };
+
+export const isAnyTrue = (...args: boolean[]): boolean =>
+  Math.max(...args.map((arg) => (arg ? 1 : 0))) > 0;
